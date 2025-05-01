@@ -1,0 +1,43 @@
+<%- include('../layouts/header') %>
+
+    <div class="profile">
+        <section id="profile-details">
+            <h2>Profile Information</h2>
+            <p><strong>Username:</strong> <%= viewedUser.username %></p>
+            <p><strong>Email:</strong> <%= viewedUser.email %></p>
+
+            <% if (viewedUser.phone) { %>
+                <p><strong>Phone:</strong> <%= viewedUser.phone %></p>
+            <% } %>
+
+            <p><strong>First Name:</strong> <%= viewedUser.first_name %></p>
+            <p><strong>Last Name:</strong> <%= viewedUser.last_name %></p>
+            <p><strong>Account Type:</strong> <%= viewedUser.account_type %></p>
+
+            <% if (viewedUser.description) { %>
+                <p><strong>About Me:</strong> <%= viewedUser.description %></p>
+            <% } %>
+            
+            <% if (viewedUser.instagram_handle) { %>
+                <p><strong>Instagram:</strong> <a href="https://instagram.com/<%= viewedUser.instagram_handle %>" target="_blank">@<%= viewedUser.instagram_handle %></a></p>
+            
+            <% } %>
+        </section>
+      
+        <% if (viewedUser.profile_image_url) { %>
+            <section id="profile-image">
+                <h2>Profile Image</h2>
+                <img src="<%= viewedUser.profile_image_url %>" alt="<%= viewedUser.username %>'s Profile Image">
+            </section>
+        <% } %>
+
+        <% if (user && viewedUser && user.user_id === viewedUser.user_id) { %>
+        <section id="edit-profile">
+            <h2>Want to update your profile?</h2>
+             <a href="/users/edit/<%= user.user_id %>" class="btn">Edit Profile</a>
+        <% } %>
+
+        </section>
+    </div>
+
+<%- include('../layouts/footer') %>

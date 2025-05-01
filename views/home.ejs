@@ -1,0 +1,62 @@
+<%- include('./layouts/header') %>
+<div class="content">
+    <section id="create-post">
+        <h2>Create a New Post</h2>
+        <form action="/posts/create" method="POST" enctype="multipart/form-data">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="content">Content:</label>
+            <textarea id="content" name="content" rows="5" required></textarea>
+
+            <label for="image">Image (optional):</label>
+            <input type="file" id="image" name="image" accept="image/*">
+
+            <button type="submit">Post</button>
+        </form>
+    </section>
+    <div>
+    <section id="feed">
+        <h2>Your Feed</h2>
+        <% if (posts.length > 0) { %>
+            <% posts.forEach(post => { %>
+                <article class="post">
+                    <h3><%= post.title %></h3>
+                    <p><%= post.content %></p>
+                    <% if (post.image_url) { %>
+                        <img src="<%= post.image_url %>" alt="Post Image">
+                    <% } %>
+                    <footer>
+                        <p>Posted by <a href="/profile/<%= post.user_id %>"><%= post.username %></a> on <%= new Date(post.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) %></p>
+                    </footer>
+
+                    <!-- Delete Post Button -->
+                   <button class="delete-btn" data-id="<%= post.post_id %>">Delete</button>
+                </article>
+            <% }) %>
+        <% } else { %>
+            <p>No posts to display. Be the first to create one!</p>
+        <% } %>
+    </section>
+    </div>
+</div>
+
+<script>
+document.querySelectorAll('.delete-btn').forEach(button => {
+    button.addEventListener('click', async function () {
+        const postId = this.dataset.id;
+
+        if (!confirm('Are you sure you want to delete this post? with post id:')) return;
+
+        const response = await fetch(`/posts/delete/${postId}`, {
+            method: 'DELETE'
+        });
+
+        if (response.ok) {
+            this.closest('.post').remove();
+        } else {
+            alert('Failed to delete post');
+        }
+    });
+});
+</script>

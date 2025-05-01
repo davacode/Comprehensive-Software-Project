@@ -1,0 +1,29 @@
+<%- include('../layouts/header') %>
+<div>
+<h1>Edit User</h1>
+<form method="POST" action="/users/edit/<%= user.user_id %>">
+    <label>Username:</label>
+    <input type="text" name="username" value="<%= user.username %>" required />
+    <label>Account Type:</label>
+    <select name="account_type" required>
+        <option value="" <%= user.account_type === '' ? 'selected' : '' %>></option>
+        <option value="vendor" <%= user.account_type === 'vendor' ? 'selected' : '' %>>Vendor</option>
+        <option value="artist" <%= user.account_type === 'artist' ? 'selected' : '' %>>Artist</option>
+        <option value="venue" <%= user.account_type === 'venue' ? 'selected' : '' %>>Venue</option>
+        <option value="food" <%= user.account_type === 'food' ? 'selected' : '' %>>Food</option>
+        <option value="musician" <%= user.account_type === 'Musician' ? 'selected' : '' %>>Musician</option>
+    </select>
+    <label>Phone:</label>
+    <input type="text" name="phone" value="<%= user.phone %>" />
+    <label>First name:</label>
+    <input type="text" name="first_name" value="<%= user.first_name %>" />
+    <label>Last name:</label>
+    <input type="text" name="last_name" value="<%= user.last_name %>" />
+    <label>Description:</label>
+    <input type="text" name="description" value="<%= user.description %>" />
+    <label>Instagram:</label>
+    <input type="text" name="instagram_handle" value="<%= user.instagram_handle %>" />
+ <button type="submit">Update User</button>
+</form>
+</div>
+<%- include('../layouts/footer') %>

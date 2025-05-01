@@ -1,0 +1,36 @@
+<div class="nav">
+	<h1>Local Vendor Network</h1>
+	<div class="user-info">
+		<% if (user) { %>
+        Logged in as:
+		<a href="/profile/"><%= user.username %>
+		</a>
+		<% } else { %>
+        Not logged in
+		<% } %>
+		<form method="GET" action="/users/logout" style="margin-top: 20px;">
+			<button type="submit" class="logout-btn">Logout</button>
+		</form>
+	</div>
+	<a href="/">Home</a>
+	<link rel="stylesheet" href="/css/style.css">
+</div>
+
+<style>
+	.nav {
+	background-color: #929292;
+	width: 100%;
+	color: black;
+	text-align: center;
+	padding: 20px 0;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 85px;
+	z-index: 1000;
+	}
+	h1{
+	align:center
+	}
+</style>
